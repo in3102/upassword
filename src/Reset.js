@@ -41,9 +41,7 @@ export default class Reset extends React.Component {
     if (!oldKeyIV) return this.setState({ oldPasswordVerifyFail: true })
     this.setState({ doing: true })
     setTimeout(() => {
-      const removeReslut = window.utools.db.remove('bcryptpass')
-      if (removeReslut.error) return
-      if (!window.services.setBcryptPass(password)) return
+      if (!window.services.resetBcryptPass(password)) return
       const newKeyIV = window.services.verifyPassword(password)
       const accounts = window.utools.db.allDocs('account/')
       accounts.forEach(item => {

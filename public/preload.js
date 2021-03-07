@@ -16,7 +16,17 @@ window.services = {
       _id: 'bcryptpass',
       value: bcryptPass
     })
-    return result.ok === true
+    if (result.error) return false
+    return true
+  },
+  resetBcryptPass: (password) => {
+    if (!password) return false
+    const passDoc = window.utools.db.get('bcryptpass')
+    if (!passDoc) return false
+    passDoc.value = bcrypt.hashSync(password, 10)
+    const result = window.utools.db.put(passDoc)
+    if (result.error) return false
+    return true
   },
   verifyPassword: (password) => {
     const passDoc = window.utools.db.get('bcryptpass')

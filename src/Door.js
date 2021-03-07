@@ -43,7 +43,7 @@ export default class Door extends React.Component {
           <div className={'door-input' + (fail ? ' door-swing' : '')}>
             <input ref={c => { this.passwordInput = c }} autoFocus onKeyDown={this.handleInputKeydown} type='password' placeholder='开门密码' />
             <div>
-              <IconButton onClick={this.handleEnter} >
+              <IconButton onClick={this.handleEnter}>
                 <SubdirectoryArrowLeftIcon />
               </IconButton>
             </div>

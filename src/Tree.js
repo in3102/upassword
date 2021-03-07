@@ -50,7 +50,7 @@ export default class Tree extends React.Component {
     const keys = key.split('-')
     let target = this.props.groupTree[keys.shift()]
     if (!target) return null
-    for (let index of keys) {
+    for (const index of keys) {
       if (!target.childs) return null
       target = target.childs[index]
       if (!target) return null
@@ -278,7 +278,7 @@ export default class Tree extends React.Component {
     this.select(newSelectKey)
   }
 
-  // 账号追加
+  // 帐号追加
   append = (account, targetKey) => {
     const targetGroup = this.getNode(targetKey)
     this.props.onAppend(account, targetGroup._id)
@@ -304,7 +304,8 @@ export default class Tree extends React.Component {
           isSelected={this.state.selectedKey === key}
           isInput={this.state.inputKey === key}
           title={x.name}
-          badge={this.props.group2Accounts[x._id] ? this.props.group2Accounts[x._id].length : 0}>
+          badge={this.props.group2Accounts[x._id] ? this.props.group2Accounts[x._id].length : 0}
+        >
           {(x.childs && this.state.expandIds.includes(x._id)) && this.renderTree(x.childs, deep + 1, key)}
         </TreeNode>
       )
@@ -331,7 +332,7 @@ export default class Tree extends React.Component {
       <div className='tree-normal'>
         <div className='tree-body'>
           <TreeRoot onClick={(e) => { e.stopPropagation(); this.select('') }} move={this.move}>
-            { this.renderTree(this.props.groupTree, 0, '') }
+            {this.renderTree(this.props.groupTree, 0, '')}
           </TreeRoot>
         </div>
         <div className='tree-footer'>

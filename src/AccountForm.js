@@ -37,6 +37,9 @@ export default class AccountForm extends React.Component {
       window.utools.hideMainWindow()
       this.handleCopy(e.code === 'KeyU' ? 'usernameValue' : 'passwordValue')()
     }
+    if ((e.code === 'ArrowUp' || e.code === 'ArrowDown') && e.keyCode === 229) {
+      e.stopPropagation()
+    }
   }
 
   componentDidMount () {
@@ -52,11 +55,11 @@ export default class AccountForm extends React.Component {
       }
     })
     this.setState(stateValue)
-    window.addEventListener('keydown', this.keydownAction)
+    window.addEventListener('keydown', this.keydownAction, true)
   }
 
   componentWillUnmount () {
-    window.removeEventListener('keydown', this.keydownAction)
+    window.removeEventListener('keydown', this.keydownAction, true)
   }
 
   UNSAFE_componentWillReceiveProps (nextProps) { // eslint-disable-line
@@ -158,7 +161,7 @@ export default class AccountForm extends React.Component {
         <div>
           <TextField
             fullWidth
-            label='账号名'
+            label='用户名'
             onChange={this.handleInputChang('username')}
             value={usernameValue}
             InputProps={{
@@ -169,7 +172,7 @@ export default class AccountForm extends React.Component {
               ),
               endAdornment: (
                 <InputAdornment position='end'>
-                  <Tooltip title={'复制帐号 ' + (this.isMacOs ? '⌘' : 'Ctrl') + '+U'} placement='top' >
+                  <Tooltip title={'复制帐号 ' + (this.isMacOs ? '⌘' : 'Ctrl') + '+U'} placement='top'>
                     <IconButton tabIndex='-1' onClick={this.handleCopy('usernameValue')} size='small'>
                       <CopyrightIcon />
                     </IconButton>
@@ -194,19 +197,19 @@ export default class AccountForm extends React.Component {
               ),
               endAdornment: (
                 <InputAdornment position='end'>
-                  <Tooltip title={passwordEye ? '关闭明文' : '明文显示'} placement='top' >
+                  <Tooltip title={passwordEye ? '关闭明文' : '明文显示'} placement='top'>
                     <IconButton tabIndex='-1' onClick={this.handlePasswordVisible} size='small'>
                       {passwordEye ? <VisibilityOffIcon /> : <VisibilityIcon />}
                     </IconButton>
                   </Tooltip>
                   <span className='account-form-icon-divider' />
-                  <Tooltip title='使用随机密码' placement='top' >
+                  <Tooltip title='使用随机密码' placement='top'>
                     <IconButton tabIndex='-1' onClick={this.handleShowRandomPassword} size='small'>
                       <AutorenewIcon />
                     </IconButton>
                   </Tooltip>
                   <span className='account-form-icon-divider' />
-                  <Tooltip title={'复制密码 ' + (this.isMacOs ? '⌘' : 'Ctrl') + '+P'} placement='top' >
+                  <Tooltip title={'复制密码 ' + (this.isMacOs ? '⌘' : 'Ctrl') + '+P'} placement='top'>
                     <IconButton tabIndex='-1' onClick={this.handleCopy('passwordValue')} size='small'>
                       <CopyrightIcon />
                     </IconButton>
@@ -250,13 +253,13 @@ export default class AccountForm extends React.Component {
               ),
               endAdornment: (
                 <InputAdornment position='end'>
-                  <Tooltip title='浏览器中打开' placement='top' >
+                  <Tooltip title='浏览器中打开' placement='top'>
                     <IconButton tabIndex='-1' onClick={this.handleOpenLink} size='small'>
                       <OpenInBrowserIcon />
                     </IconButton>
                   </Tooltip>
                   <span className='account-form-icon-divider' />
-                  <Tooltip title='复制链接' placement='top' >
+                  <Tooltip title='复制链接' placement='top'>
                     <IconButton tabIndex='-1' onClick={this.handleCopy('linkValue')} size='small'>
                       <CopyrightIcon />
                     </IconButton>

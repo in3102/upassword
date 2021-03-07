@@ -54,7 +54,7 @@ class TreeNode extends React.Component {
     const left = deep * 16 + (isParent ? 0 : 15) + 8
     return connectDragSource(connectDropTarget(
       <div style={(isOverCurrent && canDrop) ? { opacity: 0.3 } : null}>
-        <div onClick={onClick} className='tree-node' >
+        <div onClick={onClick} className='tree-node'>
           <div style={{ paddingLeft: left }} className={'tree-node-body' + (isSelected ? ' tree-node-selected' : '')}>
             {isParent && <div onClick={onExpand} className={children ? 'tree-node-icon-arrow-down' : 'tree-node-icon-arrow-right'} />}
             {isInput ? (

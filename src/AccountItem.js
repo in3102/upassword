@@ -19,9 +19,9 @@ const boxTarget = {
     }
     const source = monitor.getItem()
     if (source.index < props.index) {
-      props.move(source.index, props.index - 1)
+      props.onMove(source.index, props.index - 1)
     } else {
-      props.move(source.index, props.index)
+      props.onMove(source.index, props.index)
     }
   }
 }

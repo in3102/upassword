@@ -207,6 +207,13 @@ html, body {
 // 暗黑模式
 .dark-mode {
   @darkDoorBgColor: #303133;
+  ::-webkit-scrollbar-track-piece {
+    background-color: @darkDoorBgColor; 
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #666;
+    border-color: @darkDoorBgColor;
+  }
   @keyframes darkfailbg
   {
     0% {

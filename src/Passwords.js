@@ -34,7 +34,7 @@ export default class Passwords extends React.Component {
       const newAccount = {
         _id: 'account/' + Date.now(),
         title: window.services.encryptValue(keyiv, '默认标题'),
-        username: window.services.encryptValue(keyiv, '默认账号名'),
+        username: window.services.encryptValue(keyiv, '默认用户名'),
         groupId: newGroup.id,
         createAt: Date.now(),
         sort: 0

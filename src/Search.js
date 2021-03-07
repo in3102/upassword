@@ -57,7 +57,7 @@ export default class Search extends React.Component {
   }
 
   generateGroupDic = (array, dic) => {
-    for (let g of array) {
+    for (const g of array) {
       dic[g._id] = g
       if (g.childs) {
         this.generateGroupDic(g.childs, dic)
@@ -77,7 +77,7 @@ export default class Search extends React.Component {
   search (key) {
     key = key.toLowerCase()
     const searchResult = []
-    for (let id in this.props.decryptAccountDic) {
+    for (const id in this.props.decryptAccountDic) {
       const cdata = this.props.decryptAccountDic[id]
       const titleIndex = cdata.title ? cdata.title.toLowerCase().indexOf(key) : -1
       const usernameIndex = cdata.username ? cdata.username.toLowerCase().indexOf(key) : -1
@@ -118,15 +118,16 @@ export default class Search extends React.Component {
         <div className='search-list'>
           <table>
             <thead>
-              <tr><th>分组</th><th>标题</th><th>账号名</th></tr>
+              <tr><th>分组</th><th>标题</th><th>用户名</th></tr>
             </thead>
             <tbody>
               {
-                list.map((a, i) => <tr onClick={() => this.select(i)} className={selectedIndex === i ? 'search-selected' : null} key={a.account._id}>
-                  <td span={8}>{this.groupName(a.account.groupId)}</td>
-                  <td id={a.account._id + '_title'} span={8}>{a.title}</td>
-                  <td id={a.account._id + '_username'} span={8}>{a.username}</td>
-                </tr>)
+                list.map((a, i) => (
+                  <tr onClick={() => this.select(i)} className={selectedIndex === i ? 'search-selected' : null} key={a.account._id}>
+                    <td span={8}>{this.groupName(a.account.groupId)}</td>
+                    <td id={a.account._id + '_title'} span={8}>{a.title}</td>
+                    <td id={a.account._id + '_username'} span={8}>{a.username}</td>
+                  </tr>))
               }
             </tbody>
           </table>

@@ -14,7 +14,7 @@ const boxTarget = {
       return
     }
     const source = monitor.getItem()
-    props.move(source.index, props.index - 1)
+    props.onMove(source.index, props.index - 1)
   }
 }
 

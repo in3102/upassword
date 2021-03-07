@@ -13,7 +13,7 @@ import VpnKeyIcon from '@material-ui/icons/VpnKey'
 import ReplayIcon from '@material-ui/icons/Replay'
 
 export default class RandomPassword extends React.Component {
-  defaultSpecialCharacters = `!@#$%^&*()_+-=,.<>?/\\|[]{}:;"'\`~`
+  defaultSpecialCharacters = '!@#$%^&*()_+-=,.<>?/\\|[]{}:;"\'`~'
 
   constructor (props) {
     super(props)
@@ -99,6 +99,10 @@ export default class RandomPassword extends React.Component {
     this.setState({ passwordValue })
   }
 
+  handleReplay = () => {
+    this.generateRandom()
+  }
+
   handlePasswordChange = (e) => {
     const value = e.target.value
     if (!value) {
@@ -161,8 +165,8 @@ export default class RandomPassword extends React.Component {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position='end'>
-                    <Tooltip title='重新生成' placement='top' >
-                      <IconButton onClick={this.generateRandom} color='primary'>
+                    <Tooltip title='重新生成' placement='top'>
+                      <IconButton onClick={this.handleReplay} color='primary'>
                         <ReplayIcon />
                       </IconButton>
                     </Tooltip>

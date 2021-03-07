@@ -1,6 +1,6 @@
 'use strict';
 
-var bindings = require("./"+process.platform+"/"+process.arch+"/bcrypt_lib.node");
+var bindings = require("./" + process.platform + "/" + process.arch + "/bcrypt_lib.node");
 
 var crypto = require('crypto');
 
@@ -17,9 +17,9 @@ module.exports.genSaltSync = function genSaltSync(rounds, minor) {
         throw new Error('rounds must be a number');
     }
 
-    if(!minor) {
+    if (!minor) {
         minor = 'b';
-    } else if(minor !== 'b' && minor !== 'a') {
+    } else if (minor !== 'b' && minor !== 'a') {
         console.log(minor, typeof minor);
         throw new Error('minor must be either "a" or "b"');
     }
@@ -39,7 +39,7 @@ module.exports.genSalt = function genSalt(rounds, minor, cb) {
         cb = arguments[0];
         rounds = 10;
         minor = 'b';
-    // callback is second argument
+        // callback is second argument
     } else if (typeof arguments[1] === 'function') {
         // have to set callback first otherwise arguments are overriden
         cb = arguments[1];
@@ -56,21 +56,21 @@ module.exports.genSalt = function genSalt(rounds, minor, cb) {
     } else if (typeof rounds !== 'number') {
         // callback error asynchronously
         error = new Error('rounds must be a number');
-        return process.nextTick(function() {
+        return process.nextTick(function () {
             cb(error);
         });
     }
 
-    if(!minor) {
+    if (!minor) {
         minor = 'b'
-    } else if(minor !== 'b' && minor !== 'a') {
+    } else if (minor !== 'b' && minor !== 'a') {
         error = new Error('minor must be either "a" or "b"');
-        return process.nextTick(function() {
+        return process.nextTick(function () {
             cb(error);
         });
     }
 
-    crypto.randomBytes(16, function(error, randomBytes) {
+    crypto.randomBytes(16, function (error, randomBytes) {
         if (error) {
             cb(error);
             return;
@@ -109,14 +109,14 @@ module.exports.hash = function hash(data, salt, cb) {
 
     if (typeof data === 'function') {
         error = new Error('data must be a string and salt must either be a salt string or a number of rounds');
-        return process.nextTick(function() {
+        return process.nextTick(function () {
             data(error);
         });
     }
 
     if (typeof salt === 'function') {
         error = new Error('data must be a string and salt must either be a salt string or a number of rounds');
-        return process.nextTick(function() {
+        return process.nextTick(function () {
             salt(error);
         });
     }
@@ -133,21 +133,21 @@ module.exports.hash = function hash(data, salt, cb) {
 
     if (data == null || salt == null) {
         error = new Error('data and salt arguments required');
-        return process.nextTick(function() {
+        return process.nextTick(function () {
             cb(error);
         });
     }
 
     if (typeof data !== 'string' || (typeof salt !== 'string' && typeof salt !== 'number')) {
         error = new Error('data must be a string and salt must either be a salt string or a number of rounds');
-        return process.nextTick(function() {
+        return process.nextTick(function () {
             cb(error);
         });
     }
 
 
     if (typeof salt === 'number') {
-        return module.exports.genSalt(salt, function(err, salt) {
+        return module.exports.genSalt(salt, function (err, salt) {
             return bindings.encrypt(data, salt, cb);
         });
     }
@@ -180,14 +180,14 @@ module.exports.compare = function compare(data, hash, cb) {
 
     if (typeof data === 'function') {
         error = new Error('data and hash arguments required');
-        return process.nextTick(function() {
+        return process.nextTick(function () {
             data(error);
         });
     }
 
     if (typeof hash === 'function') {
         error = new Error('data and hash arguments required');
-        return process.nextTick(function() {
+        return process.nextTick(function () {
             hash(error);
         });
     }
@@ -204,14 +204,14 @@ module.exports.compare = function compare(data, hash, cb) {
 
     if (data == null || hash == null) {
         error = new Error('data and hash arguments required');
-        return process.nextTick(function() {
+        return process.nextTick(function () {
             cb(error);
         });
     }
 
     if (typeof data !== 'string' || typeof hash !== 'string') {
         error = new Error('data and hash must be strings');
-        return process.nextTick(function() {
+        return process.nextTick(function () {
             cb(error);
         });
     }

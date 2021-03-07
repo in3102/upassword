@@ -111,25 +111,25 @@ export default class AccountArea extends React.Component {
           <div className='account-list-body'>
             {
               data && (
-                <AccountRoot move={this.handleMoveSort} index={data.length}>
+                <AccountRoot onMove={this.handleMoveSort} index={data.length}>
                   {
                     data.map((a, i) => (
                       <div key={i} onClick={() => this.handleSelect(i)}>
-                        <AccountItem move={this.handleMoveSort} index={i} isSelected={i === selectedIndex} key={a._id} data={decryptAccountDic[a._id]} />
+                        <AccountItem onMove={this.handleMoveSort} index={i} isSelected={i === selectedIndex} key={a._id} data={decryptAccountDic[a._id]} />
                       </div>))
                   }
                 </AccountRoot>)
             }
           </div>
           <div className='account-list-footer'>
-            <Tooltip title={'新增条目 ' + (this.isMacOs ? '⌘' : 'Ctrl') + '+N'} placement='top'>
+            <Tooltip title={'新增帐号 ' + (this.isMacOs ? '⌘' : 'Ctrl') + '+N'} placement='top'>
               <div>
                 <IconButton tabIndex='-1' onClick={this.handleCreate} size='small'>
                   <AddIcon />
                 </IconButton>
               </div>
             </Tooltip>
-            <Tooltip title='删除条目' placement='top'>
+            <Tooltip title='删除帐号' placement='top'>
               <div>
                 <IconButton tabIndex='-1' disabled={!data} onClick={this.handleDelete} size='small'>
                   <RemoveIcon />
@@ -139,7 +139,7 @@ export default class AccountArea extends React.Component {
           </div>
         </div>
         <div className='account-area-right'>
-          {data && <AccountForm keyIV={keyIV} decryptAccountDic={decryptAccountDic} onUpdate={onUpdate} data={data[selectedIndex]} /> }
+          {data && <AccountForm keyIV={keyIV} decryptAccountDic={decryptAccountDic} onUpdate={onUpdate} data={data[selectedIndex]} />}
         </div>
       </div>)
   }

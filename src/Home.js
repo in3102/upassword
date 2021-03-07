@@ -53,10 +53,10 @@ class Home extends React.Component {
       })
       // 获取解密 KEYIV
       const keyiv = this.props.keyIV
-      // 获取所有账号
+      // 获取所有帐号
       const accounts = window.utools.db.allDocs('account/')
       if (accounts.length > 0) {
-        for (let account of accounts) {
+        for (const account of accounts) {
           if (account.groupId in group2Accounts) {
             group2Accounts[account.groupId].push(account)
           } else {
@@ -78,7 +78,7 @@ class Home extends React.Component {
             }
           }
         }
-        for (let groupId in group2Accounts) {
+        for (const groupId in group2Accounts) {
           if (group2Accounts[groupId].length > 1) {
             group2Accounts[groupId] = group2Accounts[groupId].sort((a, b) => a.sort - b.sort)
           }
@@ -90,13 +90,13 @@ class Home extends React.Component {
     window.addEventListener('focus', this.handleClearDetectLiveTimeout)
     window.utools.setSubInput(({ text }) => {
       this.setState({ searchKey: text })
-    }, '标题/账号名搜索')
+    }, '标题/用户名搜索')
   }
 
   componentWillUnmount () {
     const { group2Accounts, sortedGroup } = this.state
     if (sortedGroup.length > 0) {
-      for (let groupId of sortedGroup) {
+      for (const groupId of sortedGroup) {
         if (groupId in group2Accounts) {
           const length = group2Accounts[groupId].length
           for (let i = 0; i < length; i++) {
@@ -263,7 +263,7 @@ class Home extends React.Component {
     }
     return (
       <div className='home'>
-        { searchKey ? (
+        {searchKey ? (
           <Search
             keyIV={this.props.keyIV}
             onAccountUpdate={this.handleAccountUpdate}

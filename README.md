@@ -10,7 +10,7 @@ npm install
 npm run build
 ``` 
 
-`dist/plugin.json`  ->  复制粘贴到 uTools 输入框 -> 新建 uTools 开发插件
+把 `dist/plugin.json` 文件  ->  复制粘贴到 uTools 输入框 -> 新建 uTools 开发插件
 
 
 ### 引用的 bcrypt 库

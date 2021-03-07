@@ -57,8 +57,8 @@ export default class Reset extends React.Component {
           }
           item[f] = window.services.encryptValue(newKeyIV, plainVal)
         })
-        window.utools.db.put(item)
       })
+      window.utools.db.bulkDocs(accounts)
       this.props.onOut()
     }, 50)
   }
@@ -122,7 +122,7 @@ export default class Reset extends React.Component {
                 重置密码
               </Button>
             </div>
-            <div className='setting-remark'>重设密码是将所有数据解密再重新加密，存在数据更改失败风险</div>
+            <div className='setting-remark'>重设密码是将所有帐号数据解密再重新加密</div>
           </div>
         </div>
       </div>)

@@ -1,7 +1,6 @@
 {
-  "private": true,
   "name": "upassword",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "productName": "密码管理器",
   "scripts": {
     "dev": "webpack -w",

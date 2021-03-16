@@ -50,7 +50,7 @@ export default class Door extends React.Component {
           </div>
         </div>
         <div>
-          <Button onClick={this.handleResetClick}>重置开门密码</Button>
+          <Button onClick={this.handleResetClick}>修改开门密码</Button>
         </div>
       </div>
     )

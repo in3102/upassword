@@ -6,12 +6,18 @@ import Tooltip from '@material-ui/core/Tooltip'
 import AddIcon from '@material-ui/icons/Add'
 import RemoveIcon from '@material-ui/icons/Remove'
 import IconButton from '@material-ui/core/IconButton'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import Button from '@material-ui/core/Button'
 
 export default class AccountArea extends React.Component {
   isMacOs = window.utools.isMacOs()
 
   state = {
-    selectedIndex: 0
+    selectedIndex: 0,
+    showDeleteConfirm: false
   }
 
   keydownAction = (e) => {
@@ -82,8 +88,18 @@ export default class AccountArea extends React.Component {
     }, 50)
   }
 
+  handleCloseDeleteConfirm = () => {
+    this.setState({ showDeleteConfirm: false })
+  }
+
+  handleShowDeleteConfirm = () => {
+    if (!this.props.data) return
+    this.setState({ showDeleteConfirm: true })
+  }
+
   handleDelete = () => {
     if (!this.props.data) return
+    this.setState({ showDeleteConfirm: false })
     this.props.onDelete(this.props.data[this.state.selectedIndex])
   }
 
@@ -103,7 +119,7 @@ export default class AccountArea extends React.Component {
 
   render () {
     const { keyIV, data, onUpdate, decryptAccountDic } = this.props
-    const { selectedIndex } = this.state
+    const { selectedIndex, showDeleteConfirm } = this.state
     if (data === null) return false
     return (
       <div className='account-area'>
@@ -131,11 +147,20 @@ export default class AccountArea extends React.Component {
             </Tooltip>
             <Tooltip title='删除帐号' placement='top'>
               <div>
-                <IconButton tabIndex='-1' disabled={!data} onClick={this.handleDelete} size='small'>
+                <IconButton tabIndex='-1' disabled={!data} onClick={this.handleShowDeleteConfirm} size='small'>
                   <RemoveIcon />
                 </IconButton>
               </div>
             </Tooltip>
+            <Dialog open={showDeleteConfirm} onClose={this.handleCloseDeleteConfirm} >
+              <DialogContent>
+                <DialogContentText>确认删除该帐号?</DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={this.handleCloseDeleteConfirm} color='default'>取消</Button>
+                <Button onClick={this.handleDelete} color='secondary' autoFocus>删除</Button>
+              </DialogActions>
+            </Dialog>
           </div>
         </div>
         <div className='account-area-right'>

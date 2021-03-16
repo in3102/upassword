@@ -67,7 +67,7 @@ export default class Reset extends React.Component {
       return (
         <div className='reset-doing'>
           <CircularProgress color='secondary' />
-          <div className='reset-doing-text'>重置中...</div>
+          <div className='reset-doing-text'>修改中...</div>
         </div>)
     }
     return (
@@ -117,10 +117,10 @@ export default class Reset extends React.Component {
                 size='large'
                 variant='contained'
               >
-                重置密码
+                修改密码
               </Button>
             </div>
-            <div className='setting-remark'>重设密码是将所有帐号数据解密再重新加密</div>
+            <div className='setting-remark'>修改开门密码将所有帐号数据解密再重新加密</div>
           </div>
         </div>
       </div>)

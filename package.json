@@ -1,6 +1,6 @@
 {
   "name": "upassword",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "productName": "密码管理器",
   "scripts": {
     "dev": "webpack -w",
